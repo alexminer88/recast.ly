@@ -1,14 +1,15 @@
 import VideoListEntry from '../components/VideoListEntry.js';
 
-var VideoList = (props) => (
-  <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here!!!</h5> <VideoListEntry video={props.videos[0]}/> </div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5>{props.videos[0].snippet.title}</div>
-  </div>
-);
+var VideoList = (props) => {
+  
+  var mapped = props.videos.map(video => (<VideoListEntry video={video}/>));
+  
+  return (
+    <div className="video-list">
+      {mapped}
+    </div>
+  );
+};
 
 // class VideoList extends ReactComponent
 
