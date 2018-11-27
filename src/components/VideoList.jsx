@@ -2,7 +2,9 @@ import VideoListEntry from '../components/VideoListEntry.js';
 
 var VideoList = (props) => {
   
-  var mapped = props.videos.map(video => (<VideoListEntry video={video}/>));
+  
+  
+  var mapped = props.videos.map(video => (<VideoListEntry video={video} onClick={props.onClick}/>));
   
   return (
     <div className="video-list">
