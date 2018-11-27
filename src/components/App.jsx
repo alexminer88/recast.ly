@@ -1,15 +1,20 @@
 import VideoList from '../components/VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from '../components/VideoPlayer.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      current: exampleVideoData[0],
-      videos: exampleVideoData
+      // current: exampleVideoData[0],
+      // videos: exampleVideoData
+      current: {},
+      videos: []
     };
+    
   }
   
   onClick(e, video) {
@@ -18,7 +23,35 @@ class App extends React.Component {
     });   
   }
   
+  componentDidMount() {
+    // get request
+    var options = {
+      query: 'react',
+      max: 5,
+      key: YOUTUBE_API_KEY
+    };
+    
+    // set state to get request's data
+    var callback = function(videoData) {
+      this.setState({
+        current: videoData[0],
+        videos: videoData
+      });
+    };
+    
+    this.props.searchYouTube(options, callback.bind(this));
+    
+  }
+  
   render() {
+    if (Object.keys(this.state.current).length === 0 || this.state.videos.length === 0) {
+      var videoPlayer = <div></div>;
+      var videoList = <div></div>;
+    } else {
+      var videoPlayer = <div><VideoPlayer video={this.state.current} /></div>;
+      var videoList = <div><VideoList videos={this.state.videos} onClick={this.onClick.bind(this)}/></div>;
+    }
+    
     return (
       <div>
         <nav className="navbar">
@@ -28,10 +61,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={this.state.current} /></div>
+            {videoPlayer}
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={this.state.videos} onClick={this.onClick.bind(this)}/></div>
+            {videoList}
           </div>
         </div>
       </div>
