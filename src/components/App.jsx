@@ -43,22 +43,7 @@ class App extends React.Component {
     });
   }
   
-  componentDidMount() {
-    // var options = {
-    //   query: 'react js',
-    //   max: 5,
-    //   key: YOUTUBE_API_KEY
-    // };
-    
-    // var callback = function(videoData) {
-    //   this.setState({
-    //     current: videoData[0],
-    //     videos: videoData
-    //   });
-    // };
-    
-    // this.props.searchYouTube(options, callback.bind(this)); 
-    
+  componentDidMount() {    
     this.props.searchYouTube(this.options, this.updateVideoDataCallBack);
   }
   
@@ -68,15 +53,15 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><Search searchYouTube={this.props.searchYouTube} updateVideoDataCallBack={this.updateVideoDataCallBack} options={this.options}/></div>
+            <Search searchYouTube={this.props.searchYouTube} updateVideoDataCallBack={this.updateVideoDataCallBack} options={this.options}/>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={this.state.current} /></div>
+            <VideoPlayer video={this.state.current}/>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={this.state.videos} onClick={this.onClick.bind(this)}/></div> 
+            <VideoList videos={this.state.videos} onClick={this.onClick.bind(this)}/> 
           </div>
         </div>
       </div>

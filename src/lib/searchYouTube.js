@@ -9,4 +9,6 @@ var searchYouTube = (options, callback) => {
   });
 };
 
-export default searchYouTube;
+var searchYouTubeDebounced = _.debounce(searchYouTube, 500);
+
+export {searchYouTube as default, searchYouTubeDebounced};

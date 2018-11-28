@@ -2,8 +2,6 @@ import VideoListEntry from '../components/VideoListEntry.js';
 
 var VideoList = (props) => {
   
-  
-  
   var mapped = props.videos.map(video => (<VideoListEntry video={video} onClick={props.onClick}/>));
   
   return (
@@ -12,8 +10,6 @@ var VideoList = (props) => {
     </div>
   );
 };
-
-// class VideoList extends ReactComponent
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

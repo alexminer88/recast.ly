@@ -13,18 +13,18 @@ class Search extends React.Component {
       max: this.props.options.max,
       key: this.props.options.key
     }, this.props.updateVideoDataCallBack);
+    console.log(this.state.value);
   }
   
   handleChange(event) {
     this.setState({value: event.target.value});
-    setTimeout((() => console.log(this.state)).bind(this), 1000);
-    setTimeout(this.setTimeoutCallback.bind(this), 2000);
+    this.setTimeoutCallback();
   }
   
   handleClick(event) {
     // make a get request
     
-    //empty out search bar
+    this.setTimeoutCallback();
   }
   
   render() {
