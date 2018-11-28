@@ -2,7 +2,7 @@ import VideoList from '../components/VideoList.js';
 import placeholderVideoData from '../data/placeholderVideoData.js';
 import VideoPlayer from '../components/VideoPlayer.js';
 import YOUTUBE_API_KEY from '../config/youtube.js';
-
+import Search from '../components/Search.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,14 +10,27 @@ class App extends React.Component {
     
     this.state = {
       current: placeholderVideoData[0],
-      videos: placeholderVideoData
-    };  
+      videos: placeholderVideoData,
+      query: ''
+    };
+    
+    this.handleSearchFormChange = this.handleSearchFormChange.bind(this);
+    this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
   }
   
   onClick(e, video) {
     this.setState({
       current: video
     });   
+  }
+  
+  handleSearchFormChange(event) {
+    this.setState({query: event.target.value});
+    setTimeout((() => console.log(this.state.query)).bind(this), 1000);
+  }
+  
+  handleSearchButtonClick(event) {
+    
   }
   
   componentDidMount() {
@@ -43,7 +56,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div><Search queryString={this.state.query} formChange={this.handleSearchFormChange.bind(this)}/></div>
           </div>
         </nav>
         <div className="row">
